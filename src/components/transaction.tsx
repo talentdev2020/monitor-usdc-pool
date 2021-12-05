@@ -35,13 +35,13 @@ const Transaction = (props: IProps) => {
           </TableHead>
           <TableBody>
             {props.transactions?.map((row, index) => (
-              <TableRow key={`${row.time}_${index}`}>
+              <TableRow key={`${row.timestamp}_${index}`}>
                 <TableCell align="right">{row.type}</TableCell>
                 <TableCell align="right">${row.totalValue}</TableCell>
                 <TableCell align="right">{row.tokenAmount0}</TableCell>
                 <TableCell align="right">{row.tokenAmount1}</TableCell>
                 <TableCell align="right">{row.account}</TableCell>
-                <TableCell align="right">{row.time}</TableCell>
+                <TableCell align="right">{row.passedTime}</TableCell>
               </TableRow>
             ))}
           </TableBody>

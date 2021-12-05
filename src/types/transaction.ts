@@ -67,5 +67,6 @@ export interface ITableTransaction {
     tokenAmount0: string;
     tokenAmount1: string;
     account: string;
-    time: string;
+    timestamp: string;
+    passedTime: string;
 }

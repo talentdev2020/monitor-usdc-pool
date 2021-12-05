@@ -51,7 +51,8 @@ const Transactions = (props: IProps) => {
             tokenAmount0: fixedCurrency(mint.amount0, 4) + "ETH",
             tokenAmount1: fixedCurrency(mint.amount1, 2) + "USDC",
             account: mint.to,
-            time: diffTime(mint.transaction.timestamp)
+            passedTime: diffTime(mint.transaction.timestamp),
+            timestamp: mint.transaction.timestamp,
         }))
         const burns = props.transactions.burns.map(burn => ({
             type: "Remove",
@@ -59,7 +60,8 @@ const Transactions = (props: IProps) => {
             tokenAmount0: fixedCurrency(burn.amount0, 4) + "ETH",
             tokenAmount1: fixedCurrency(burn.amount1,2) + "USDC",
             account: burn.sender,
-            time: diffTime(burn.transaction.timestamp)
+            passedTime: diffTime(burn.transaction.timestamp),
+            timestamp: burn.transaction.timestamp
         }))
         const swaps = props.transactions.swaps.map(swap => ({
             type: swap.amount0In === "0" ? "Swap USDC for ETH" : "Swap ETH for USDC",
@@ -67,9 +69,13 @@ const Transactions = (props: IProps) => {
             tokenAmount0: swap.amount0In !== "0" ? `${fixedCurrency(swap.amount0In, 2)} USDC` : `${fixedCurrency(swap.amount1In, 4)} ETH`,
             tokenAmount1: swap.amount1Out !== "0" ? `${fixedCurrency(swap.amount1Out, 4)} ETH` : `${fixedCurrency(swap.amount0Out, 2)} USDC`,
             account: swap.to,
-            time: diffTime(swap.transaction.timestamp)
+            passedTime: diffTime(swap.transaction.timestamp),
+            timestamp: swap.transaction.timestamp
         }))
+
         const allTransactions = mints.concat(burns, swaps);
+        allTransactions.sort((a,b) => (parseInt(b.timestamp) - parseInt(a.timestamp)));
+
         setMintTransactions(mints);
         setBurnTransactions(burns);
         setSwapTransactions(swaps);
