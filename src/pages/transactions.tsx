@@ -2,14 +2,14 @@ import React, { useEffect , useState} from 'react';
 import { request } from 'graphql-request';
 import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { tokenAddress } from "../consts/contractAddress";
+import { pairAddress } from "../consts/contractAddress";
 import TransactionQuery from "../queries/transactions";
 import TransactionsComponent from "../components/transactions";
 import { ITransactions } from '../types/transaction';
 
 const endpoint = "https://api.thegraph.com/subgraphs/name/ianlapham/uniswapv2";
 const variables = {
-  allPairs: [tokenAddress]
+  allPairs: [pairAddress]
 }
 
 const useStyles = makeStyles(theme => ({
@@ -30,9 +30,10 @@ const Transactions = () => {
     swaps: []
   });
   const init =  () => {
-    request(endpoint, TransactionQuery, variables).then((data) => setTransactions(data))
+    request(endpoint, TransactionQuery, variables).then((data: ITransactions) => setTransactions(data))
     .finally(() => setIsLoading(false));
   }
+  
   useEffect(() => {
     setIsLoading(true);
     init();

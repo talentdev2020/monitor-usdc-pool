@@ -28,6 +28,7 @@ const TabPanel = (props: any) => {
 interface IProps {
     transactions: ITransactions
 }
+
 const Transactions = (props: IProps) => {
     const [value, setValue] = React.useState<string>("all");
     const [mintTransactions, setMintTransactions] = useState<ITableTransaction[]>([]);
