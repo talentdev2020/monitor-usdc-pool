@@ -6,7 +6,6 @@ import Transactions from './pages/transactions';
 import Header from "./components/header"
 import Bottom from "./components/bottom"
 
-
 import './App.css';
 
 const theme = createTheme({

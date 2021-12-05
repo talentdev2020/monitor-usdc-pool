@@ -1,49 +1,37 @@
-import React, { useState } from 'react';
-import { isAddress } from "@ethersproject/address";
-import { useWeb3React } from "@web3-react/core";
-import { Contract } from "@ethersproject/contracts";
+import React, { useEffect } from 'react';
+import { useWeb3React } from "@web3-react/core"
+import { request, gql } from 'graphql-request';
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { DaiContractAddress } from "../consts/contractAddress";
-import ABI from "../consts/tokenABI.json"  ;
+import { tokenAddress } from "../consts/contractAddress";
+import TransactionQuery from "../queries/transactions";
+import TransactionsComponent from "../components/transactions";
+
+const endpoint = "https://api.thegraph.com/subgraphs/name/ianlapham/uniswapv2";
+const variables = {
+  allPairs: [tokenAddress]
+}
 
 const useStyles = makeStyles(theme => ({
   root: {
-    margin: "auto",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: 'column',
-    height: "calc(100vh - 100px)"
+    
   },
-  inputAddress: {
-    margin: "15px 0",
-    width: "400px"
-  },
-  inputAmount: {
-    width: "400px",
-    marginBottom: "5px"
-  },
-  button: {
-    width: "200px"
-  },
-  balance: {
-    color: "#6655f1",
-    paddingLeft: "20px"
-  }
 }));
 
-const Transfer = () => {
+const Transactions = () => {
   const classes = useStyles();
-  const { account, library } = useWeb3React();
-
+ 
+  const init =  () => {
+    request(endpoint, TransactionQuery, variables).then((data) => console.log(data))
+  }
+  useEffect(() => {
+    init();
+  }, [])
+  console.log({TransactionQuery})
   return (
     <div className={classes.root}>
-      Transfer
+      <TransactionsComponent />
     </div>
   )
 }
 
-export default Transfer;
+export default Transactions;
