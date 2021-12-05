@@ -39,6 +39,9 @@ const Bottom = () => {
         <div>
             <span>DeFi App</span>
         </div>
+        <div>
+          {account}
+        </div>
       </div>
   )
 }
