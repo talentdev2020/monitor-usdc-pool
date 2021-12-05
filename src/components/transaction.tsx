@@ -20,7 +20,7 @@ interface IProps {
 const Transaction = (props: IProps) => {
     const classes = useStyles();
     return (
-        <TableContainer component={Paper}>
+    <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -32,7 +32,7 @@ const Transaction = (props: IProps) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.transactions.map((row, index) => (
+            {props.transactions?.map((row, index) => (
               <TableRow key={`${row.time}_${index}`}>
                 <TableCell align="right">{row.totalValue}</TableCell>
                 <TableCell align="right">{row.tokenAmount0}</TableCell>
