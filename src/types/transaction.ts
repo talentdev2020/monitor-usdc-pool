@@ -1,6 +1,6 @@
 interface ITransaction {
     id: string;
-    timestamp: number;
+    timestamp: string;
     __typename: string
 }
 interface IPair {
@@ -47,11 +47,11 @@ export interface IBurnTrnasaction {
 export interface ISwapTransaction {
     transaction: ITransaction;
     pair: IPair;
-    amount0In: number;
-    amount0Out: number;
-    amount1In: number;
-    amount1Out: number;
-    amountUSD: number;
+    amount0In: string;
+    amount0Out: string;
+    amount1In: string;
+    amount1Out: string;
+    amountUSD: string;
     to: string;
     __typename: string;
 }
@@ -62,9 +62,10 @@ export interface ITransactions {
 }
 
 export interface ITableTransaction {
-    totalValue: number;
-    tokenAmount0: number;
-    tokenAmount1: number;
+    type: string;
+    totalValue: string;
+    tokenAmount0: string;
+    tokenAmount1: string;
     account: string;
-    time: number;
+    time: string;
 }

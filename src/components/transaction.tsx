@@ -11,7 +11,8 @@ import { ITableTransaction } from "../types/transaction";
 
 const useStyles = makeStyles(theme => ({
     table: {
-        minWidth: 650,
+      minWidth: 650,
+      maxHeight: "100%"
     },
 }));
 interface IProps {
@@ -24,6 +25,7 @@ const Transaction = (props: IProps) => {
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
+              <TableCell align="right">Type</TableCell>
               <TableCell align="right">Total Value</TableCell>
               <TableCell align="right">Token Amont</TableCell>
               <TableCell align="right">Token Amount</TableCell>
@@ -34,7 +36,8 @@ const Transaction = (props: IProps) => {
           <TableBody>
             {props.transactions?.map((row, index) => (
               <TableRow key={`${row.time}_${index}`}>
-                <TableCell align="right">{row.totalValue}</TableCell>
+                <TableCell align="right">${row.type}</TableCell>
+                <TableCell align="right">${row.totalValue}</TableCell>
                 <TableCell align="right">{row.tokenAmount0}</TableCell>
                 <TableCell align="right">{row.tokenAmount1}</TableCell>
                 <TableCell align="right">{row.account}</TableCell>

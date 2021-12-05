@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Transaction from "./transaction";
 import { tokenAddress } from "../consts/contractAddress";
 import { ITableTransaction, ITransactions } from '../types/transaction';
+import { fixedCurrency, diffTime } from "../utils/format";
 
 const useStyles = makeStyles(theme => ({
    
@@ -43,25 +44,28 @@ const Transactions = (props: IProps) => {
 
     useEffect(() => {
         const mints = props.transactions.mints.map(mint => ({
-            totalValue: mint.amountUSD,
-            tokenAmount0: mint.amount0,
-            tokenAmount1: mint.amount1,
+            type: "Add",
+            totalValue: fixedCurrency(mint.amountUSD, 1),
+            tokenAmount0: fixedCurrency(mint.amount0, 4) + "ETH",
+            tokenAmount1: fixedCurrency(mint.amount1, 2) + "USDC",
             account: mint.to,
-            time: mint.transaction.timestamp
+            time: diffTime(mint.transaction.timestamp)
         }))
         const burns = props.transactions.burns.map(burn => ({
-            totalValue: burn.amountUSD,
-            tokenAmount0: burn.amount0,
-            tokenAmount1: burn.amount1,
+            type: "Remove",
+            totalValue: fixedCurrency(burn.amountUSD,1),
+            tokenAmount0: fixedCurrency(burn.amount0, 4) + "ETH",
+            tokenAmount1: fixedCurrency(burn.amount1,2) + "USDC",
             account: burn.sender,
-            time: burn.transaction.timestamp
+            time: diffTime(burn.transaction.timestamp)
         }))
-        const swaps = props.transactions.swaps.map(mint => ({
-            totalValue: mint.amountUSD,
-            tokenAmount0: mint.amount0Out,
-            tokenAmount1: mint.amount1In,
-            account: mint.to,
-            time: mint.transaction.timestamp
+        const swaps = props.transactions.swaps.map(swap => ({
+            type: swap.amount0In === "0" ? "Swap USDC for ETH" : "Swap ETH for USDC",
+            totalValue: fixedCurrency(swap.amountUSD, 1),
+            tokenAmount0: swap.amount0In !== "0" ? `${fixedCurrency(swap.amount0In, 2)} USDC` : `${fixedCurrency(swap.amount1In, 4)} ETH`,
+            tokenAmount1: swap.amount1Out !== "0" ? `${fixedCurrency(swap.amount1Out, 4)} ETH` : `${fixedCurrency(swap.amount0Out, 2)} USDC`,
+            account: swap.to,
+            time: diffTime(swap.transaction.timestamp)
         }))
         const allTransactions = mints.concat(burns, swaps);
         setMintTransactions(mints);
