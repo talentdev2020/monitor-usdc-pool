@@ -30,14 +30,15 @@ const Transactions = () => {
     swaps: []
   });
   const init =  () => {
-    setIsLoading(true);
     request(endpoint, TransactionQuery, variables).then((data) => setTransactions(data))
     .finally(() => setIsLoading(false));
   }
   useEffect(() => {
+    setIsLoading(true);
     init();
+    setInterval(init, 1000 * 60);
   }, [])
-  console.log({TransactionQuery})
+
   return (
     <div className={classes.root}>
       {
