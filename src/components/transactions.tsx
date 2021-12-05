@@ -10,7 +10,9 @@ import { ITableTransaction, ITransactions } from '../types/transaction';
 import { fixedCurrency, diffTime } from "../utils/format";
 
 const useStyles = makeStyles(theme => ({
-   
+   tabSection: {
+       height: "100px"
+   }
 }));
 
 const TabPanel = (props: any) => {
@@ -36,7 +38,7 @@ interface IProps {
     transactions: ITransactions
 }
 const Transactions = (props: IProps) => {
-    const [value, setValue] = React.useState<string>("swap");
+    const [value, setValue] = React.useState<string>("all");
     const [mintTransactions, setMintTransactions] = useState<ITableTransaction[]>([]);
     const [burnTransactions, setBurnTransactions] = useState<ITableTransaction[]>([]);
     const [swapTransactions, setSwapTransactions] = useState<ITableTransaction[]>([]);
@@ -87,7 +89,7 @@ const Transactions = (props: IProps) => {
             <Tab label="Removes" value="remove"/>
           </Tabs>
         </Box>
-        <TabPanel value={value} index="all">
+        <TabPanel value={value} index="all" >
             <Transaction transactions={allTransactions} />
         </TabPanel>
         <TabPanel value={value} index="swap">
