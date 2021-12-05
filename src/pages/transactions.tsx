@@ -2,10 +2,12 @@ import React, { useEffect , useState} from 'react';
 import { useWeb3React } from "@web3-react/core"
 import { request, gql } from 'graphql-request';
 import { makeStyles } from "@material-ui/core/styles";
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { tokenAddress } from "../consts/contractAddress";
 import TransactionQuery from "../queries/transactions";
 import TransactionsComponent from "../components/transactions";
 import { ITransactions } from '../types/transaction';
+import { findByLabelText } from '@testing-library/dom';
 
 const endpoint = "https://api.thegraph.com/subgraphs/name/ianlapham/uniswapv2";
 const variables = {
@@ -14,19 +16,25 @@ const variables = {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "calc(100vh - 100px)"
   },
 }));
 
 const Transactions = () => {
   const classes = useStyles();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [transactions, setTransactions] = useState<ITransactions>({
     mints: [],
     burns: [],
     swaps: []
   });
   const init =  () => {
+    setIsLoading(true);
     request(endpoint, TransactionQuery, variables).then((data) => setTransactions(data))
+    .finally(() => setIsLoading(false));
   }
   useEffect(() => {
     init();
@@ -34,7 +42,10 @@ const Transactions = () => {
   console.log({TransactionQuery})
   return (
     <div className={classes.root}>
-      <TransactionsComponent transactions={transactions}/>
+      {
+        isLoading ? <CircularProgress />
+        : <TransactionsComponent transactions={transactions}/>
+      }
     </div>
   )
 }

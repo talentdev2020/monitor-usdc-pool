@@ -13,13 +13,13 @@ export function diffTime(value) {
 
     let strTime = "";
     if (daysPassed) {
-        strTime += daysPassed + "days ";
+        strTime += daysPassed + " days ";
     }
     if (hoursPassed) {
-        strTime += hoursPassed + "hours ";
+        strTime += hoursPassed + " hours ";
     }
     if (minutesPassed) {
-        strTime += minutesPassed + "minutes ";
+        strTime += minutesPassed + " minutes ";
     }
-    return strTime + "ago"
+    return strTime + " ago"
 }
