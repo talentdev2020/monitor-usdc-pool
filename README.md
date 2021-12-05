@@ -2,7 +2,8 @@
 
 ## Live Site
 
-https://monitor-usdc-pool.netlify.app/
+https://monitor-usdc-eth.surge.sh/
+
 ## Overview
 
 Our frontend team builds the web application that enables our users to interact with the Ondo Protocol, as well as resources and tooling to help them make educated investment decisions. Many of these services read data directly from the blockchain.
