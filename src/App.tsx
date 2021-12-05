@@ -9,8 +9,9 @@ import Bottom from "./components/bottom"
 import './App.css';
 
 const theme = createTheme({
-  /* theme for v1.x */
- });
+  typography: {
+    fontFamily: "'Raleway', sans-serif"
+  },});
 
  function getLibrary(provider: any): Web3Provider {
   const library = new Web3Provider(provider)
