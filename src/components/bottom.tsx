@@ -37,7 +37,7 @@ const Bottom = () => {
   return (
       <div className={classes.root}>
         <div>
-            <span>DeFi App</span>
+            <span>Ondo Finance</span>
         </div>
         <div>
           {account}
