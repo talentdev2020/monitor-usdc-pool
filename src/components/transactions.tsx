@@ -47,27 +47,27 @@ const Transactions = (props: IProps) => {
     useEffect(() => {
         const mints = props.transactions.mints.map(mint => ({
             type: "Add",
-            totalValue: fixedCurrency(mint.amountUSD, 1),
-            tokenAmount0: fixedCurrency(mint.amount0, 4) + "ETH",
-            tokenAmount1: fixedCurrency(mint.amount1, 2) + "USDC",
+            totalValue: fixedCurrency(mint.amountUSD, 2),
+            tokenAmount0: fixedCurrency(mint.amount1, 6) + "ETH",
+            tokenAmount1: fixedCurrency(mint.amount0, 4) + "USDC",
             account: mint.to,
             passedTime: diffTime(mint.transaction.timestamp),
             timestamp: mint.transaction.timestamp,
         }))
         const burns = props.transactions.burns.map(burn => ({
             type: "Remove",
-            totalValue: fixedCurrency(burn.amountUSD,1),
-            tokenAmount0: fixedCurrency(burn.amount0, 4) + "ETH",
-            tokenAmount1: fixedCurrency(burn.amount1,2) + "USDC",
+            totalValue: fixedCurrency(burn.amountUSD, 2),
+            tokenAmount0: fixedCurrency(burn.amount1, 6) + "ETH",
+            tokenAmount1: fixedCurrency(burn.amount0, 4) + "USDC",
             account: burn.sender,
             passedTime: diffTime(burn.transaction.timestamp),
             timestamp: burn.transaction.timestamp
         }))
         const swaps = props.transactions.swaps.map(swap => ({
             type: swap.amount0In === "0" ? "Swap USDC for ETH" : "Swap ETH for USDC",
-            totalValue: fixedCurrency(swap.amountUSD, 1),
-            tokenAmount0: swap.amount0In !== "0" ? `${fixedCurrency(swap.amount0In, 2)} USDC` : `${fixedCurrency(swap.amount1In, 4)} ETH`,
-            tokenAmount1: swap.amount1Out !== "0" ? `${fixedCurrency(swap.amount1Out, 4)} ETH` : `${fixedCurrency(swap.amount0Out, 2)} USDC`,
+            totalValue: fixedCurrency(swap.amountUSD, 2),
+            tokenAmount0: swap.amount0In !== "0" ? `${fixedCurrency(swap.amount0In, 4)} USDC` : `${fixedCurrency(swap.amount1In, 6)} ETH`,
+            tokenAmount1: swap.amount1Out !== "0" ? `${fixedCurrency(swap.amount1Out, 6)} ETH` : `${fixedCurrency(swap.amount0Out, 4)} USDC`,
             account: swap.to,
             passedTime: diffTime(swap.transaction.timestamp),
             timestamp: swap.transaction.timestamp
