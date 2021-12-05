@@ -1,0 +1,1 @@
+export const GRAPHQL_ENDPOINT = "https://api.thegraph.com/subgraphs/name/ianlapham/uniswapv2"
