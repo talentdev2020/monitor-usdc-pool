@@ -1,4 +1,4 @@
-export default `query($allPairs: [String]!) {
+const query = `query($allPairs: [String]!) {
       mints(first: 20, where: {pair_in: $allPairs}, orderBy: timestamp, orderDirection: desc) {
         transaction {
           id
@@ -80,3 +80,5 @@ export default `query($allPairs: [String]!) {
       __typename
     }
 }`
+
+export default query;

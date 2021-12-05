@@ -1,19 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import { makeStyles } from "@material-ui/core/styles";
 import Transaction from "./transaction";
-import { tokenAddress } from "../consts/contractAddress";
 import { ITableTransaction, ITransactions } from '../types/transaction';
 import { fixedCurrency, diffTime } from "../utils/format";
-
-const useStyles = makeStyles(theme => ({
-   tabSection: {
-       height: "100px"
-   }
-}));
 
 const TabPanel = (props: any) => {
     const { children, value, index, ...other } = props;

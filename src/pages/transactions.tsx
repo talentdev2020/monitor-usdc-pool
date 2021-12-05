@@ -1,13 +1,11 @@
 import React, { useEffect , useState} from 'react';
-import { useWeb3React } from "@web3-react/core"
-import { request, gql } from 'graphql-request';
+import { request } from 'graphql-request';
 import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { tokenAddress } from "../consts/contractAddress";
 import TransactionQuery from "../queries/transactions";
 import TransactionsComponent from "../components/transactions";
 import { ITransactions } from '../types/transaction';
-import { findByLabelText } from '@testing-library/dom';
 
 const endpoint = "https://api.thegraph.com/subgraphs/name/ianlapham/uniswapv2";
 const variables = {
