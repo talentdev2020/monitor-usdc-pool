@@ -1,25 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Web3ReactProvider } from "@web3-react/core";
+import { Web3Provider } from '@ethersproject/providers'
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles'; // v1.x
+import Transactions from './pages/transactions';
+import Header from "./components/header"
+import Bottom from "./components/bottom"
+
+
 import './App.css';
+
+const theme = createTheme({
+  /* theme for v1.x */
+ });
+
+ function getLibrary(provider: any): Web3Provider {
+  const library = new Web3Provider(provider)
+  library.pollingInterval = 12000
+  return library
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MuiThemeProvider theme={theme}>
+      <Web3ReactProvider getLibrary={getLibrary}>
+        <Header />
+        <Transactions />
+        <Bottom />
+      </Web3ReactProvider>
+    </MuiThemeProvider>
   );
 }
 
